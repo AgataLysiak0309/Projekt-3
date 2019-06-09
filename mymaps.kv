@@ -1,0 +1,139 @@
+# -*- coding: utf-8 -*-
+CoreApp:
+
+<Menu>:
+        BoxLayout:
+                orientation: "vertical"
+                FileChooserListView:
+                        id: filechooser
+                        path: './'
+
+                BoxLayout:
+                        size_hint_y: None
+                        height: 30
+                        Button:
+                                text: "Wróć"
+                                on_release: root.action_cancel()
+                        Button:
+                                text: "Wybierz"
+                                on_release: root.action_load(filechooser.path, filechooser.selection)
+
+<CoreApp>:
+        # wyglad
+        orientation: 'vertical'
+        
+        # obiekty aplikacji, uchwyty do nich
+        map_: osmMap_
+        gpx_file_: file_path
+        label_total_len_: total_len
+        label_total_time_: total_time
+        label_total_avg_vel_: avg_vel
+        label_total_sum_diff_: sum_diff
+        label_total_sum_asc_: sum_asc
+        label_total_sum_desc_: sum_desc
+        label_total_z_min_: z_min
+        label_total_z_max_: z_max
+        label_hard_pos_: hard_pos
+        label_hard_angle_: hard_angle
+
+        # uklad widoku
+
+        BoxLayout:
+                MapView:
+                        id: osmMap_
+                        lat: 51.1
+                        lon: 22
+                        zoom: 5
+                        map_source: 'osm-hot'
+        BoxLayout:
+                height: "30dp"
+                size_hint_y: None
+                Label:
+                        id: file_path
+        BoxLayout:
+                height: "20dp"
+                size_hint_y: None
+
+                Label:
+                        size_hint_x: 25
+                        text: "Długość"
+                Label:
+                        size_hint_x: 25
+                        text: "Czas"
+                Label:
+                        size_hint_x: 25
+                        text: "Śr. prędkość"
+                Label:
+                        size_hint_x: 25
+                        text: "Przewyższenie"
+                Label:
+                        size_hint_x: 25
+                        text: "Suma podejść"
+                Label:
+                        size_hint_x: 25
+                        text: "Suma zejść"
+                Label:
+                        size_hint_x: 25
+                        text: "Wys. min"
+                Label:
+                        size_hint_x: 25
+                        text: "Wys. max"
+
+        BoxLayout:
+                height: "40dp"
+                size_hint_y: None
+                Label:
+                        size_hint_x: 25
+                        id: total_len
+                Label:
+                        size_hint_x: 25
+                        id: total_time
+                Label:
+                        size_hint_x: 25
+                        text: "0"
+                        id: avg_vel
+                Label:
+                        size_hint_x: 25
+                        text: "0"
+                        id: sum_diff
+                Label:
+                        size_hint_x: 25
+                        text: "0"
+                        id: sum_asc
+                Label:
+                        size_hint_x: 25
+                        text: "0"
+                        id: sum_desc
+                Label:
+                        size_hint_x: 25
+                        text: "0"
+                        id: z_min
+                Label:
+                        size_hint_x: 25
+                        text: "0"
+                        id: z_max
+        BoxLayout:
+                height: "40dp"
+                size_hint_y: None
+                Label:
+                        size_hint_x: 75
+                        text: "Najtrudniejszy\nPołożenie"
+                Label:
+                        size_hint_x: 75
+                        id: hard_pos
+                Label:
+                        size_hint_x: 75
+                        text: "Najtrudniejszy\nNachylenie"
+                Label:
+                        size_hint_x: 75
+                        id: hard_angle
+
+        BoxLayout:
+                height: "40dp"
+                size_hint_y: None
+                Button:
+                        text: 'Wczytaj *.gpx'
+                        on_press: root.load_button_pressed_()
+                Button:
+                        text: 'Wyczyść'
+                        on_press: root.clear_button_pressed_()
